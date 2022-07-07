@@ -26,7 +26,23 @@ function App() {
   }
 
   function handleLocation(){
-    alert("No Location selected")
+    if (navigator.geolocation){
+      navigator.geolocation.getCurrentPosition((position) => {
+        axios.get('/near-me', {
+          params: {
+            lat:position.coords.latitude,
+            long:position.coords.longitude,
+          },
+        }).then(response => {
+            console.log(response.data)
+        })
+          .catch(error => console.lof(error.message))
+      },(error) =>{
+        console.log(error.message)
+      })
+    }else{
+      alert('Location not supported')
+    }
   }
   function listTrends(){
     return(
@@ -49,7 +65,7 @@ function App() {
         <h2>Twitter Trends</h2>
       </header>
       <div className="menu">
-        <select name="trending-places" onChange={e => alert(e.target.value)}>
+        <select name="trending-places" onChange={e => setWoeid(e.target.value)}>
           <option value="1"> Worldwide </option>
           <option value="23424975">UK</option>
           <option value="23424768">Brazil</option>

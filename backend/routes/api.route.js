@@ -13,14 +13,20 @@ const client = new Twitter({
 router.get('/trends', async (req, res, next) => {
   const id = req.query.woeid;
   const trends = await client.get('trends/place.json', {
-    id: 1
+    id,
   })
   res.send(trends);
 });
 
 // To get the WOE-ID for a particular location
 router.get('/near-me', async (req, res, next) => {
-  res.send({ message: 'Ok api is working 🚀' });
+  try {
+    const {lat, long} = req.query;
+    const response = await client.get('/trends/closest.json')
+    
+  } catch (error) {
+      next(error)
+  }
 });
 
 module.exports = router;
