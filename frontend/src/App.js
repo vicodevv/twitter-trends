@@ -1,13 +1,46 @@
 import './App.css';
 import {FaCrosshairs} from 'react-icons/fa'
 import logo from './twitter.svg';
+import axios from 'axios';
+import {useState, useEffect} from 'react';
 
 function App() {
+
+  const[trends, setTrends] = useState([])
+  const[woeid, setWoeid] = useState('1')
+
+  useEffect(() => getTrends(), [woeid])
+
+
+
+  function getTrends(){
+    axios.get('/api/trends', {
+      params: {
+        woeid: woeid,
+      }
+    })
+          .then(response => {
+            setTrends(response.data[0].trends)
+          })
+          .catch(error => console.log(error.message))
+  }
+
   function handleLocation(){
     alert("No Location selected")
   }
   function listTrends(){
-    return <h2>Trends</h2>
+    return(
+      <ul>
+        {trends.map((trend, index) =>{
+          return (
+            <li key = {index}>
+              <a href={trend.url}>{trend.name}</a>
+              {trend.tweet_volume && <span className='tweet_volume'>{trend.tweet_volume}</span>}
+            </li>
+          )
+        })}
+      </ul>
+    )
   }
   return (
     <div className="App">
