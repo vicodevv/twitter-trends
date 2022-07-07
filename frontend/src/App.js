@@ -6,6 +6,9 @@ function App() {
   function handleLocation(){
     alert("No Location selected")
   }
+  function listTrends(){
+    return <h2>Trends</h2>
+  }
   return (
     <div className="App">
       <header className="App-header">
@@ -13,7 +16,7 @@ function App() {
         <h2>Twitter Trends</h2>
       </header>
       <div className="menu">
-        <select name="trending-places">
+        <select name="trending-places" onChange={e => alert(e.target.value)}>
           <option value="1"> Worldwide </option>
           <option value="23424975">UK</option>
           <option value="23424768">Brazil</option>
@@ -26,6 +29,7 @@ function App() {
           <FaCrosshairs />
         </div>
         </div>
+        <div className='content'>{listTrends()}</div>
     </div>
   );
 }
