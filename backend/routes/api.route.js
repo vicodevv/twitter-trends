@@ -22,8 +22,11 @@ router.get('/trends', async (req, res, next) => {
 router.get('/near-me', async (req, res, next) => {
   try {
     const {lat, long} = req.query;
-    const response = await client.get('/trends/closest.json')
-    
+    const result = await client.get('/trends/closest.json', {
+      lat, 
+      long,
+    })
+    res.send(result)
   } catch (error) {
       next(error)
   }

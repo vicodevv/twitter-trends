@@ -16,7 +16,7 @@ function App() {
   function getTrends(){
     axios.get('/api/trends', {
       params: {
-        woeid: woeid,
+        woeid,
       }
     })
           .then(response => {
@@ -28,15 +28,15 @@ function App() {
   function handleLocation(){
     if (navigator.geolocation){
       navigator.geolocation.getCurrentPosition((position) => {
-        axios.get('/near-me', {
+        axios.get('/api/near-me', {
           params: {
             lat:position.coords.latitude,
             long:position.coords.longitude,
           },
         }).then(response => {
-            console.log(response.data)
+            setWoeid(response.data[0].woeid)
         })
-          .catch(error => console.lof(error.message))
+          .catch(error => console.log(error.message))
       },(error) =>{
         console.log(error.message)
       })
@@ -73,6 +73,7 @@ function App() {
           <option value="23424900">Mexico</option>
           <option value="23424775">Canada</option>
           <option value="23424977">United States</option>
+          <option value="1398823">Lagos</option>
         </select>
         <div className="location" onClick={handleLocation}>
           <FaCrosshairs />
