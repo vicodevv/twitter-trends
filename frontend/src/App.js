@@ -9,7 +9,7 @@ function App() {
   const[trends, setTrends] = useState([])
   const[woeid, setWoeid] = useState('1')
 
-  useEffect(() => getTrends(), [woeid])
+  useEffect(() => getTrends())
 
 
 
