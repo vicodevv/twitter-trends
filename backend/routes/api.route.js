@@ -11,12 +11,17 @@ const client = new Twitter({
 
 // To get trending topics
 router.get('/trends', async (req, res, next) => {
-  const id = req.query.woeid;
-  const trends = await client.get('trends/place.json', {
+  try {
+    const id = req.query.woeid;
+    const trends = await client.get('trends/place.json', {
     id,
   })
   res.send(trends);
+  } catch (error) {
+    next(error)
+  } 
 });
+  
 
 // To get the WOE-ID for a particular location
 router.get('/near-me', async (req, res, next) => {
