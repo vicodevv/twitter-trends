@@ -8,7 +8,7 @@
     "build":"cd frontend && npm run build",
     "install-frontend":"cd frontend && npm install",
     "heroku-postbuild":"npm run install-frontend && npm run build",
-    "start": "cd frontend && react-scripts start",
+    "start": "cd backend && node app.js",
     "dev": "concurrently 'cd frontend && npm start' 'cd backend && npm run dev' "
   },
   "keywords": [],
