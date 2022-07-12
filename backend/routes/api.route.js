@@ -18,6 +18,7 @@ router.get('/trends', async (req, res, next) => {
   })
   res.send(trends);
   } catch (error) {
+    console.log(error.message)
     next(error)
   } 
 });
@@ -33,6 +34,7 @@ router.get('/near-me', async (req, res, next) => {
     })
     res.send(result)
   } catch (error) {
+      console.log(error.message)
       next(error)
   }
 });
