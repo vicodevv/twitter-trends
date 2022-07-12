@@ -14,7 +14,7 @@ function App() {
 
 
   function getTrends(){
-    axios.get('https://vico-twitter-trend.herokuapp.com/api/trends', {
+    axios.get('/api/trends', {
       params: {
         woeid,
       }
@@ -28,7 +28,7 @@ function App() {
   function handleLocation(){
     if (navigator.geolocation){
       navigator.geolocation.getCurrentPosition((position) => {
-        axios.get('https://vico-twitter-trend.herokuapp.com/api/near-me', {
+        axios.get('/api/near-me', {
           params: {
             lat:position.coords.latitude,
             long:position.coords.longitude,
